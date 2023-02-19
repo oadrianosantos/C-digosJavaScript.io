@@ -1,0 +1,28 @@
+async function imc(weight, height) {
+  if (typeof weight !== "number" || typeof height !== "number") {
+    return Promise.reject("Argumentos precisam ser do tipo número");
+  }
+  return weight / (height * height);
+}
+
+async function showImc(weight, height) {
+  console.log(`Calculando IMC- Altura: ${height} - Peso: ${weight}`);
+
+  try {
+    const result = await imc(weight, height);
+    console.log(`O resultado do imc é: ${result}`);
+    if (result < 18.5) console.log("Situação: Magresa");
+    else if (result < 25) console.log("Situação: Normal");
+    else if (result < 30) console.log("Situação: Sobrepesp");
+    else if (result < 40) console.log("Situação: Obesidade");
+    else console.log("Situação: Obesidade Grave");
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+showImc(71, 1.74);
+showImc(70, 1.73);
+showImc(71, "Adriano");
+showImc(82, 1.6);
+showImc(120, 1.7);
